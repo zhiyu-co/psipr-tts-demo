@@ -1,10 +1,22 @@
-# PSIPR-TTS Audio Demo
+# Beyond MOS Predictors — audio demo
 
-Project page and audio samples for PSIPR-TTS, prepared for ICASSP 2027.
+Static audio demo for **Beyond MOS Predictors: AudioLLM Feedback for Naturalness-Oriented TTS Reinforcement Learning**.
 
-The site compares Base, AudioLLM-Point, and PSIPR samples in Chinese and English.
+The page presents bilingual zero-shot TTS examples from Seed-TTS and CV3-Eval and compares five systems:
 
-## Local preview
+- Base
+- MOS Predictor
+- CER--NLL
+- AudioLLM-Point
+- PSIPR (Ours)
 
-Open `index.html` directly, or serve the directory with any static HTTP server.
+Each example includes the source speaker prompt audio and synthesized outputs for the same target sentence. Numerical scores are intentionally omitted from the listening page.
 
+Preview locally:
+
+```bash
+cd demo
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000`. The directory can be deployed directly with GitHub Pages or any static web server.

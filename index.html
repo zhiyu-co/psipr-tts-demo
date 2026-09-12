@@ -3,78 +3,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Audio samples for AudioLLM-guided naturalness reinforcement learning and PSIPR.">
-  <title>PSIPR-TTS · Audio Samples</title>
+  <meta name="description" content="Audio demo for Beyond MOS Predictors: AudioLLM Feedback for Naturalness-Oriented TTS Reinforcement Learning.">
+  <title>Beyond MOS Predictors · AudioLLM Feedback for TTS RL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header class="hero">
+  <header class="paper-header" id="top">
     <nav class="nav shell">
-      <a class="brand" href="#top" aria-label="PSIPR-TTS home"><span>P</span> PSIPR-TTS</a>
-      <div class="nav-links">
-        <a href="#method">Method</a>
-        <a href="#samples">Samples</a>
-      </div>
+      <a class="brand" href="#top" aria-label="Paper demo home">AudioLLM-TTS</a>
+      <a class="nav-link" href="#samples">Audio Samples</a>
     </nav>
 
-    <div class="hero-content shell" id="top">
-      <p class="eyebrow">Audio-language-model feedback for speech synthesis</p>
-      <h1>Naturalness feedback<br><em>beyond MOS predictors.</em></h1>
-      <p class="lede">AudioLLM feedback directly optimizes synthesized-speech naturalness, while pointwise-seeded iterative pairwise ranking further refines the reward used for GRPO.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#samples">Listen to samples</a>
-        <a class="button secondary" href="#method">How it works</a>
-      </div>
-    </div>
+    <div class="paper-intro shell">
+      <p class="eyebrow">TTS reinforcement learning · Audio demo</p>
+      <h1>Beyond MOS Predictors: AudioLLM Feedback for Naturalness-Oriented TTS Reinforcement Learning</h1>
 
-    <div class="wave" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <div class="authors" aria-label="Authors">
+        <p>Chu Zeng<sup>1</sup>, Wenrui Zhang<sup>1</sup>, Pingyi Fan<sup>1</sup>, Wei-Qiang Zhang<sup>1*</sup></p>
+        <p class="affiliation"><sup>1</sup> Department of Electronic Engineering, Tsinghua University, Beijing, China</p>
+        <p class="emails"><a href="mailto:zengc25@mails.tsinghua.edu.cn">zengc25@mails.tsinghua.edu.cn</a> · <a href="mailto:wqzhang@tsinghua.edu.cn">wqzhang@tsinghua.edu.cn</a></p>
+      </div>
+
+      <div class="abstract-block">
+        <h2>Abstract</h2>
+        <p>Reinforcement learning (RL) for text-to-speech (TTS) commonly relies on automatic-speech-recognition objectives or fixed mean-opinion-score (MOS) predictors, motivating richer, rubric-conditioned feedback for naturalness-oriented optimization. We propose using an audio-language model (AudioLLM) as a naturalness reward for TTS RL. Across bilingual zero-shot benchmarks, AudioLLM feedback improves naturalness as assessed by two held-out AudioLLM judges while maintaining competitive intelligibility relative to a dedicated CER–NLL reward, despite using no explicit recognition objective. We further introduce Pointwise-Seeded Iterative Pairwise Ranking (PSIPR), which refines pointwise AudioLLM scores through sparse bidirectional comparisons of closely matched samples. This pairwise refinement consistently improves pointwise feedback and achieves higher naturalness scores than the DNSMOS P.808 reward baseline under both judges in every language–dataset condition. Our results demonstrate AudioLLMs as effective perceptual feedback for TTS post-training, with pairwise comparison providing an additional improvement.</p>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="method shell" id="method">
-      <div class="section-heading">
-        <p class="eyebrow">The idea</p>
-        <h2>Pointwise feedback, locally refined.</h2>
-      </div>
-      <div class="steps">
-        <article><b>01</b><h3>Group sampling</h3><p>Generate multiple candidate utterances for the same target text.</p></article>
-        <article><b>02</b><h3>Pointwise seeding</h3><p>Use an AudioLLM score to establish a coarse initial ordering.</p></article>
-        <article><b>03</b><h3>Pairwise refinement</h3><p>Compare nearby unseen candidates in two sparse Swiss-style rounds.</p></article>
-        <article><b>04</b><h3>Ordinal GRPO</h3><p>Convert the refined ranking into bounded group-relative rewards.</p></article>
-      </div>
-    </section>
-
     <section class="samples" id="samples">
       <div class="shell">
         <div class="section-heading samples-heading">
           <div>
-            <p class="eyebrow">Prompt-conditioned zero-shot generation · CV3-Eval</p>
-            <h2>Listen side by side.</h2>
+            <p class="eyebrow">Seed-TTS + CV3-Eval · bilingual zero-shot synthesis</p>
+            <h2>Audio Samples</h2>
+            <p class="section-intro">Listen to the speaker prompt first, then compare the same target sentence across the five systems. Scores are intentionally omitted from the listening interface.</p>
           </div>
-          <div class="language-tabs" role="tablist" aria-label="Language">
-            <button class="active" data-language="zh" role="tab" aria-selected="true">中文</button>
-            <button data-language="en" role="tab" aria-selected="false">English</button>
+          <div class="sample-controls">
+            <div class="language-tabs" role="tablist" aria-label="Language">
+              <button class="active" data-language="zh" role="tab" aria-selected="true">中文</button>
+              <button data-language="en" role="tab" aria-selected="false">English</button>
+            </div>
+            <button class="stop-button" id="stop-all" type="button" aria-label="Pause all audio">Pause all</button>
           </div>
         </div>
 
         <div class="legend" aria-label="Systems shown">
           <span><i class="dot base"></i>Base</span>
+          <span><i class="dot mos"></i>MOS Predictor</span>
+          <span><i class="dot cer"></i>CER–NLL</span>
           <span><i class="dot point"></i>AudioLLM-Point</span>
           <span><i class="dot ours"></i>PSIPR <strong>Ours</strong></span>
         </div>
-        <p class="selection-note">For each language, we pool Seed-TTS and CV3-Eval, retain samples where bidirectional SpeechJudge consistently prefers PSIPR to AudioLLM-Point, rank by the identity-aligned mean score margin, and randomly draw seven from the top 20 with a fixed seed. Per-sample scores are hidden to avoid biasing listening.</p>
+
         <div id="sample-list" class="sample-list" aria-live="polite"></div>
       </div>
     </section>
-
   </main>
 
-  <footer><div class="shell"><span>PSIPR-TTS</span><span>Research demo · 2026</span></div></footer>
+  <footer>
+    <div class="shell">
+      <span>Beyond MOS Predictors</span>
+      <span>Research demo · 2026</span>
+    </div>
+  </footer>
+  <script src="assets/selected_samples.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>
